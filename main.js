@@ -15,9 +15,20 @@ let smallCup = {
 };
 
 const coffeeCups = {
-    espresso: 100,
-    latte: 250,
-    cappuccino: 250,
+    espresso: [100, "Эспрессо"],
+    latte: [250, "Латте"],
+    cappuccino: [250, "Капучино"],
+    bananaLatte: [300, "Банановый латте"],
+    vanillaLatte: [300, "Ванильный латте"],
+    flatWhite: [280,"Флет Вайт"],
+    milk: [50, "Молоко"],
+    cherrySyrup: [50, "Вишневый сироп"]
+};
+
+const coffeeNames = {
+    espresso: "Эспрессо",
+    latte: "Латте",
+    cappuccino: "Капучино",
     bananaLatte: 300,
     vanillaLatte: 300,
     flatWhite: 280,
@@ -32,7 +43,7 @@ let orderedDrink = {
     coffeeStrength: 0,
     milk: 0,
     cherrySyrup: 0,
-}
+};
 
 // countDrinkVolume() Должно быть <=350
 
