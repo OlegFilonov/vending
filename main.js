@@ -25,34 +25,9 @@ const coffeeCups = {
     cherrySyrup: [50, "Вишневый сироп"]
 };
 
-const coffeeNames = {
-    espresso: "Эспрессо",
-    latte: "Латте",
-    cappuccino: "Капучино",
-    bananaLatte: 300,
-    vanillaLatte: 300,
-    flatWhite: 280,
-    milk: 50,
-    cherrySyrup: 50,
-};
-
 // после каждого нажатия кнопки нужно пересчитывать
 
-let orderedDrink = {
-    coffeeName: '',
-    coffeeStrength: 0,
-    milk: 0,
-    cherrySyrup: 0,
-};
 
-// countDrinkVolume() Должно быть <=350
-
-function countDrinkVolume (orderedDrink) {
-    a = coffeeCups[orderedDrink.coffeeName]*orderedDrink.coffeeStrength;
-    b = coffeeCups.milk*orderedDrink.milk;
-    c = coffeeCups.cherrySyrup*orderedDrink.cherrySyrup;
-    return (a+b+c)
-}
 
 // drinkName должен равняться объёму кофе + наполнитель; ещё одна функция
 

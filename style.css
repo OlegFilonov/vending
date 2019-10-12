@@ -1,3 +1,11 @@
+body { background-color: rgba(255,0,0,.2); }
+body * * { background-color: rgba(0,255,0,.2); }
+body * * * { background-color: rgba(0,0,255,.2); }
+body * * * * { background-color: rgba(255,0,255,.2); }
+body * * * * * { background-color: rgba(0,255,255,.2); }
+body * * * * * * { background-color: rgba(255,255,0,.2); }
+body * * * * * * * { background-color: rgba(255,0,0,.2); }
+
 body {
     height: 80%;
     width: 80%;
@@ -13,3 +21,13 @@ body {
     width: 400px;
     height: 200px;
 }
+
+
+
+/* Изменения в зависимости от этапа приготовления кофе
+
+.reject {}
+
+.progress {}
+
+.ready {}*/
