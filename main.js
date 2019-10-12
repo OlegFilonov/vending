@@ -15,13 +15,13 @@ let smallCup = {
 };
 
 const coffeeCups = {
-    espresso: [100, "Эспрессо"],
-    latte: [250, "Латте"],
-    cappuccino: [250, "Капучино"],
-    bananaLatte: [300, "Банановый латте"],
-    vanillaLatte: [300, "Ванильный латте"],
-    flatWhite: [280,"Флет Вайт"],
-    milk: [50, "Молоко"],
+    espresso: [100, "Эспрессо", './vendors/img/espresso.jpg'],
+    latte: [250, "Латте", './vendors/img/latte.jpg'],
+    cappuccino: [250, "Капучино", './vendors/img/cappuccino.jpg'],
+    bananaLatte: [300, "Банановый латте", './vendors/img/bananaLatte.jpg'],
+    vanillaLatte: [300, "Ванильный латте", './vendors/img/vanillaLatte.jpg'],
+    flatWhite: [280,"Флет Вайт", './vendors/img/flatWhite.jpg'],
+    milk: [50, "Молоко", './vendors/img/milk.jpg'],
     cherrySyrup: [50, "Вишневый сироп"]
 };
 

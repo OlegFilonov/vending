@@ -35,8 +35,11 @@ function actionChoice (action) {
         seeDrinkType(action);
         decisionTree(action);
         console.log(choice);
-        console.log(countDrinkVolume(choice))
-    }
+        countDrinkVolume(choice);
+        console.log(countDrinkVolume(choice));
+    } /*else if (action !== 'payment') {
+        makingCoffee(action);
+    }*/
 
 }
 
@@ -100,7 +103,7 @@ function giveMilk () {
 
 $(document).ready(function(){
     $(".payment").on("click",function(){
-        $('header').append('<img src="https://source.unsplash.com/200x200/?coffee" alt="coffee">');
+       makingCoffee();
     });
 });
 
@@ -120,6 +123,34 @@ $(document).ready(function(){
     })
     });
 
+/*
+ProgressBar activation
+*/
+
+function makingCoffee() {
+    let progressBar = $('.reject');
+    progressBar.empty();
+    progressBar.addClass("progress");
+    progressBar.removeClass('reject');
+    $(document).ready(function(){
+        $('.progress').append('<img src="https://clck.ru/JVMkw" alt="Coffee progress" style="width: 40%; ">');
+    });
+    setTimeout(coffeeIsReady, 3000)
+}
+
+function coffeeIsReady() {
+    let coffeeResult = $('.progress');
+    coffeeResult.empty();
+    coffeeResult.addClass("result");
+    coffeeResult.removeClass('progress');
+    $(document).ready(function(){
+        $('.result').append('<img src=' + coffeeCups[choice.drinkName][2] + ' style="width: 200px; ">');
+    })
+}
+
+
+
+
 
 // image appears
 
@@ -131,5 +162,6 @@ $(document).ready(function(){
     });
 });
 */
+
 
 

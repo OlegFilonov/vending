@@ -18,16 +18,18 @@ body {
 
 .status {
     background-color: #91ff47;
-    width: 400px;
-    height: 200px;
 }
 
 
 
-/* Изменения в зависимости от этапа приготовления кофе
+/* Изменения в зависимости от этапа приготовления кофе*/
 
 .reject {}
 
-.progress {}
+.progress {
+    width: 60%;
+    height: auto;
+    position: relative;
+}
 
-.ready {}*/
+.ready {}
