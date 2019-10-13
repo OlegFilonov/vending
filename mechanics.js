@@ -241,13 +241,16 @@ function coffeeIsReady() {
     });
     pourDrink();
     console.log("Больших стаканов: " + bigCup.quantity + '; маленьких: ' + smallCup.quantity);
-    blinkingBorder();
+    blink();
     //Почему не срабатывает ожидание?
     setTimeout(music.play(), 5000);
 
     setTimeout(function () {
-        clearInterval(blinkingBorder);
+
+        // Музыка прекрщается, а мигание нет (((
+        clearInterval(blink);
         music.pause();
+        $('.status-order').append('<p class="extra-status" >НАПИТОК В ЗОНЕ ВЫДАЧИ</p>')
     }, 25000)
 
 }

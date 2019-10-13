@@ -63,7 +63,7 @@ $(document).ready(function (){
         $('#delivery').empty();
         //правильно ли вставил кнопку?
         $('.reject').append('<button>Отмена</button>');
-        clearInterval(blinkingBorder);
+        clearInterval(blink);
         music.pause()
 
     })
@@ -74,7 +74,7 @@ $(document).ready(function (){
 blinking border
 */
 
-function blinkingBorder () {
+let blink = function blinkingBorder () {
     setInterval(function () {
         if ($("#delivery").attr('class') === "noact") {
             $("#delivery").addClass("active");
