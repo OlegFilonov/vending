@@ -6,45 +6,113 @@ body * * * * * { background-color: rgba(0,255,255,.2); }
 body * * * * * * { background-color: rgba(255,255,0,.2); }
 body * * * * * * * { background-color: rgba(255,0,0,.2); }
 
-body {
-    height: 80%;
-    width: 80%;
-    margin: 10%;
+/* Fixed width for all elements*/
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
+body {
+    height: 80%;
+    max-width: 800px;
+    margin: 5% auto;
+    box-sizing: border-box;
+}
+
+footer div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    height: 10vw;
+}
+
+footer div img {
+    height: 90%;
+}
+
+
+
 .screen {
-    height: 25vw;
+    position: relative;
+    height: 10vw;
 }
 
 .status {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    width: 40%;
+    height: 90%;
     background-color: #91ff47;
 }
 
+.buttons {
+    position: relative;
+    height: 18vw;
+}
 
+ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 90%;
+    left: 5%;
+}
+
+li {
+    display: inline-flex;
+    width: 25%;
+    height: 7vw;
+    margin: 0.5em 1em;
+    align-items: center;
+    justify-content: center;
+}
 
 /* Progress bar */
 
 .progress {
-    width: 100%;
+    position: relative;
+    top: 50%;
+    left: 3%;
     background-color: grey;
+    width: 50%;
+    height: 4vw;
 }
 
 #myBar {
     width: 1%;
-    height: 30px;
+    height: 100%;
     background-color: green;
 }
 
 
 /* Изменения в зависимости от этапа приготовления кофе*/
 
-.reject {}
-
-.progress {
-    width: 60%;
-    height: auto;
-    position: relative;
+.reject, .result {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 1.5vw;
+    right: 10%;
+    width: 20%;
+    height: 12vw;
 }
+
+.result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result img {
+    max-width: 11vw;
+}
+
 
 .ready {}
 
@@ -59,4 +127,56 @@ blinking border
 
 .noact {
     border:1px solid cadetblue;
+}
+
+/*Buttons; source: https://html5book.ru/krasivye-knopki-dlya-sayta/*/
+
+button {
+    background-color: #91ff47;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    outline: none;
+    color: white;
+    display: inline-block;
+    position: relative;
+    border: 1px solid;
+    border-image: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
+    border-image-slice: 1;
+    margin: 10px 20px;   font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    overflow: hidden;
+    letter-spacing: 2px;
+    transition: .8s cubic-bezier(.165,.84,.44,1);
+}
+
+button:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 0;
+    width: 100%;
+    z-index: -1;
+    color: white;
+    background: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
+    transition: .8s cubic-bezier(.165,.84,.44,1);
+}
+button:hover {background: rgba(255,255,255,0);}
+button:hover:before {
+    bottom: 0%;
+    top: auto;
+    height: 100%;
+}
+
+@media (min-width: 300px) and (max-width: 800px) {
+    .buttons {height: 30vw}
+    .screen {height: 15vw}
+    footer div {height: 15vw}
+}
+
+@media (min-width: 800px) and (max-width: 1600px) {
+    .buttons {height: 27vw}
+    .screen {height: 15vw}
+    footer div {height: 15vw}
 }

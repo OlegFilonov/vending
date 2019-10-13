@@ -62,7 +62,7 @@ $(document).ready(function (){
         coffeeResult.removeClass('result');
         $('#delivery').empty();
         //правильно ли вставил кнопку?
-        $('.reject').append('<button>Отмена</button>');
+        $('.reject').append('<button>Отмена заказа</button>');
         clearInterval(blink);
         music.pause()
 
@@ -75,7 +75,7 @@ blinking border
 */
 
 let blink = function blinkingBorder () {
-    setInterval(function () {
+    const interval = setInterval(function () {
         if ($("#delivery").attr('class') === "noact") {
             $("#delivery").addClass("active");
             $("#delivery").removeClass("noact");
@@ -84,6 +84,9 @@ let blink = function blinkingBorder () {
             $("#delivery").removeClass("active");
         }
     }, 1500);
+    setTimeout(function () {
+        clearInterval(interval);
+    }, 25000)
 }
 
 function playMelody() {

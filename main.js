@@ -1,8 +1,6 @@
-
-
-
-
 /*Объем, Название, Картинка, Цена*/
+
+// Не меняется название напитка после выбора молока
 
 const coffeeCups = {
     espresso: [100, "Эспрессо", './vendors/img/espresso.jpg', 90],
@@ -16,7 +14,6 @@ const coffeeCups = {
 };
 
 // после каждого нажатия кнопки нужно пересчитывать
-
 
 let music = new Audio('Cha.mp3');
 music.volume = 0.3;

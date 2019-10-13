@@ -175,7 +175,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function (){
-        $('.reject').append('<button>Отмена</button>');
+        $('.reject').append('<button>Отмена заказа</button>');
         $('.reject').on('click', function () {
             $('.drink').text("Напиток:");
             $('.price').text("Цена:");
@@ -221,6 +221,7 @@ function makingCoffee() {
     progressBar.removeClass('reject');
     $(document).ready(function(){
         $('.progress').append('<div id="myBar"></div>');
+
         move();
         // $('.progress').append('<img src="https://clck.ru/JVMkw" alt="Coffee progress" style="width: 40%; ">');
     });
@@ -233,7 +234,7 @@ function coffeeIsReady() {
     coffeeResult.addClass("result");
     coffeeResult.removeClass('progress');
     $(document).ready(function(){
-        $('.result').append('<img src=' + coffeeCups[choice.drinkName][2] + ' style="width:200px" alt="Coffee is ready">');
+        $('.result').append('<img src=' + coffeeCups[choice.drinkName][2] + ' alt="Coffee is ready">');
 
         // delivery image appears
 
@@ -243,12 +244,13 @@ function coffeeIsReady() {
     console.log("Больших стаканов: " + bigCup.quantity + '; маленьких: ' + smallCup.quantity);
     blink();
     //Почему не срабатывает ожидание?
-    setTimeout(music.play(), 5000);
+    setTimeout( function () {
+        music.play()
+    }, 5000);
 
     setTimeout(function () {
 
         // Музыка прекрщается, а мигание нет (((
-        clearInterval(blink);
         music.pause();
         $('.status-order').append('<p class="extra-status" >НАПИТОК В ЗОНЕ ВЫДАЧИ</p>')
     }, 25000)
