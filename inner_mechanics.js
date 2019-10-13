@@ -38,14 +38,54 @@ function pourDrink() {
     }
 }
 
+
+/*Set default settings*/
+
+$(document).ready(function (){
+    $('#delivery').on('click', function () {
+        $('.drink').text("Напиток:");
+        $('.price').text("Цена:");
+        choice = {
+            drinkName: '',
+            drinkType: '',
+            howMany: 0,
+            milk: 0,
+            cherrySyrup: 0,
+            price: 0,
+            drinkVolume: 0
+        };
+        $('.extra-status').empty();
+        console.log(choice);
+        let coffeeResult = $('.result');
+        coffeeResult.empty();
+        coffeeResult.addClass("reject");
+        coffeeResult.removeClass('result');
+        $('#delivery').empty();
+        //правильно ли вставил кнопку?
+        $('.reject').append('<button>Отмена</button>');
+        clearInterval(blinkingBorder);
+        music.pause()
+
+    })
+});
+
+
 /*
-function pourDrink(drinkName) {
-    debugger;
-    if((coffeeCups[drinkName]<=smallCup.volume)&&(smallCup.quantity>0)) {
-        smallCup.quantity -= 1;
-    } else if (bigCup.quantity>0) {
-        bigCup.quantity -= 1;
-    } else {
-        return "Извините. Стаканчики закончились."
-    }
-}*/
+blinking border
+*/
+
+function blinkingBorder () {
+    setInterval(function () {
+        if ($("#delivery").attr('class') === "noact") {
+            $("#delivery").addClass("active");
+            $("#delivery").removeClass("noact");
+        } else {
+            $("#delivery").addClass("noact");
+            $("#delivery").removeClass("active");
+        }
+    }, 1500);
+}
+
+function playMelody() {
+
+}

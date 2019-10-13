@@ -22,9 +22,20 @@ let choice = {
 
 function ckeckoutCups (what) {
     if ((smallCup.quantity+bigCup.quantity) > 0) {
-        if (choice.drinkVolume > 355) {
-            $('.status-order').append('<p class="extra-status" >Оплатите или отмените заказа</p>')
-        } else if ((choice.drinkVolume > 225) && (bigCup.quantity === 0)) {
+
+/*Well, it's not really effective
+3)Если любое следующее нажатие кнопки может превысить
+объем большого стакана - можно нажать только кнопку оплаты.
+We need more profound mechanism of solving Cups problem here
+
+choice.drinkVolume > 280 condition protects us from '4th espresso' situation, but blocks extra milk and syrup.
+*/
+
+        if ((bigCup.quantity>0)&&(choice.drinkVolume > 280)&&(choice.drinkName==='espresso')) {
+            $('.status-order').append('<p class="extra-status" >Оплатите или отмените заказа</p>');
+        } else if ((bigCup.quantity>0)&&(choice.drinkVolume > 330)&&(choice.drinkName='milk')) {
+            $('.status-order').append('<p class="extra-status" >Оплатите или отмените заказа</p>');
+        } else if ((choice.drinkVolume > 200) && (bigCup.quantity === 0)) {
             $('.status-order').append('<p>Можно добавить только молоко</p>');
             actionChoice(what);
         } else {
@@ -143,7 +154,8 @@ function giveMilk () {
         if ((choice.drinkName === "") && (choice.drinkType !== 'author') && (choice.drinkType !== 'basic')) {
             choice.drinkName = 'milk';
             choice.milk = 1;
-            choice.price = coffeeCups.milk[3]
+            choice.price = coffeeCups.milk[3];
+            $('.drink').text("Напиток: " + coffeeCups[choice.drinkName][1]);
         } else if (choice.drinkType !== "author") {
             choice.milk += 1;
             choice.price += coffeeCups.milk[3];
@@ -162,7 +174,7 @@ $(document).ready(function(){
     });
 });
 
-$(document).ready(function(){
+$(document).ready(function (){
         $('.reject').append('<button>Отмена</button>');
         $('.reject').on('click', function () {
             $('.drink').text("Напиток:");
@@ -225,8 +237,17 @@ function coffeeIsReady() {
 
         // delivery image appears
 
-        $('.delivery').append('<img src="https://source.unsplash.com/200x200/?coffee" alt="Your coffee is ready. Take it, please">');
-    })
+        $('#delivery').append('<img src="https://source.unsplash.com/200x200/?coffee" alt="Your coffee is ready. Take it, please">');
+    });
     pourDrink();
     console.log("Больших стаканов: " + bigCup.quantity + '; маленьких: ' + smallCup.quantity);
+    blinkingBorder();
+    //Почему не срабатывает ожидание?
+    setTimeout(music.play(), 5000);
+
+    setTimeout(function () {
+        clearInterval(blinkingBorder);
+        music.pause();
+    }, 25000)
+
 }
