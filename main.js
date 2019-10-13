@@ -1,18 +1,6 @@
 
 
-/*
-Coffee Cups
-*/
 
-let bigCup = {
-    volume: 380,
-    quantity: 5,
-    };
-
-let smallCup = {
-    volume: 250,
-    quantity: 5,
-};
 
 /*Объем, Название, Картинка, Цена*/
 
@@ -31,15 +19,4 @@ const coffeeCups = {
 
 
 
-// drinkName должен равняться объёму кофе + наполнитель; ещё одна функция
 
-function pourDrink(drinkName) {
-    debugger;
-    if((coffeeCups[drinkName]<=smallCup.volume)&&(smallCup.quantity>0)) {
-        smallCup.quantity -= 1;
-    } else if (bigCup.quantity>0) {
-        bigCup.quantity -= 1;
-    } else {
-        return "Извините. Стаканчики закончились."
-    }
-}
