@@ -1,14 +1,4 @@
-/*
-Mechanics of coffee machine
-*/
-
-/*$('.espresso').on('click', function() {
-    $('.status').text("Это эспрессо!")
-});*/
-
-
-// Можно сделать в html место специальное под текст и добавлять его через text.
-// Потому что append добавляет код в конец материанскоого элемента
+/* Mechanics of coffee machine */
 
 let choice = {
     drinkName: '',
@@ -20,16 +10,45 @@ let choice = {
     drinkVolume: 0,
 };
 
+
+
+$(function(){
+    $(".payment").on("click",function(){
+        makingCoffee();
+    });
+
+    $('button').on('click', function () {
+        let action = $(this).attr("class");
+        ckeckoutCups(action);
+    });
+
+    $('.reject').append('<button>Отмена заказа</button>');
+
+    $('.reject').on('click', function () {
+        $('.drink').text("Напиток:");
+        $('.price').text("Цена:");
+        choice = {
+            drinkName: '',
+            drinkType: '',
+            howMany: 0,
+            milk: 0,
+            cherrySyrup: 0
+        };
+        $('.extra-status').empty();
+        console.log(choice)
+    })
+});
+
 function ckeckoutCups (what) {
     if ((smallCup.quantity+bigCup.quantity) > 0) {
 
-/*Well, it's not really effective
-3)Если любое следующее нажатие кнопки может превысить
-объем большого стакана - можно нажать только кнопку оплаты.
-We need more profound mechanism of solving Cups problem here
+        /*Well, it's not really effective
+        3)Если любое следующее нажатие кнопки может превысить
+        объем большого стакана - можно нажать только кнопку оплаты.
+        We need more profound mechanism of solving Cups problem here
 
-choice.drinkVolume > 280 condition protects us from '4th espresso' situation, but blocks extra milk and syrup.
-*/
+        choice.drinkVolume > 280 condition protects us from '4th espresso' situation, but blocks extra milk and syrup.
+        */
 
         if ((bigCup.quantity>0)&&(choice.drinkVolume > 280)&&(choice.drinkName==='espresso')) {
             $('.status-order').append('<p class="extra-status" >Оплатите или отмените заказа</p>');
@@ -46,19 +65,11 @@ choice.drinkVolume > 280 condition protects us from '4th espresso' situation, bu
     }
 }
 
-
-$(document).ready(function () {
-   $('button').on('click', function () {
-       let action = $(this).attr("class");
-       ckeckoutCups(action);
-    });
-});
-
-
 function actionChoice (action) {
     if ((action !== 'cherrySyrup') && (action !== 'payment') && (action !== 'reject')) {
 
-        seeDrinkType(action);
+        setDrinkType(action);
+        updateMilkButton();
         decisionTree(action);
         console.log(choice);
 
@@ -68,13 +79,11 @@ function actionChoice (action) {
     } else if ((action === 'cherrySyrup') && (choice.howMany > 0) && (choice.cherrySyrup<2) && (choice.drinkType === 'basic')) {
         choice.cherrySyrup += 1;
         choice.price += coffeeCups.cherrySyrup[3];
-        $('.drink').text("Напиток: " + coffeeCups[choice.drinkName][1] + " c " + choice.milk + ' порцией(ми) молока и ' + choice.cherrySyrup + ' сиропа');
         console.log(choice);
         console.log(countDrinkVolume(choice));
     }
-    if ((choice.milk + choice.cherrySyrup) === 0) {
-    $('.drink').text("Напиток: " + coffeeCups[choice.drinkName][1]);
-    }
+
+    updateDrinkName();
     $('.price').text("Цена: " + choice.price);
     choice.drinkVolume = countDrinkVolume(choice);
     console.log(countDrinkVolume(choice));
@@ -83,21 +92,21 @@ function actionChoice (action) {
 // countDrinkVolume() Должно быть <=350
 
 function countDrinkVolume (orderedDrink) {
-    a = coffeeCups[orderedDrink.drinkName][0]*orderedDrink.howMany;
-    b = coffeeCups.milk[0]*orderedDrink.milk;
-    c = coffeeCups.cherrySyrup[0]*orderedDrink.cherrySyrup;
+    const a = coffeeCups[orderedDrink.drinkName][0]*orderedDrink.howMany;
+    const b = coffeeCups.milk[0]*orderedDrink.milk;
+    const c = coffeeCups.cherrySyrup[0]*orderedDrink.cherrySyrup;
     return (a+b+c)
 }
 
-function countDrinkPrice (orderedDrink) {
-    a = coffeeCups[orderedDrink.drinkName][3]*orderedDrink.howMany;
-    b = coffeeCups.milk[3]*orderedDrink.milk;
-    c = coffeeCups.cherrySyrup[3]*orderedDrink.cherrySyrup;
+/*function countDrinkPrice (orderedDrink) {
+    const a = coffeeCups[orderedDrink.drinkName][3]*orderedDrink.howMany;
+    const b = coffeeCups.milk[3]*orderedDrink.milk;
+    const c = coffeeCups.cherrySyrup[3]*orderedDrink.cherrySyrup;
     return (a+b+c)
-}
+}*/
 
 /*Find out a drink type*/
-function seeDrinkType(action) {
+function setDrinkType(action) {
     if ((action === 'espresso')||
         (action === 'latte')||
         (action === 'cappuccino')) {
@@ -151,57 +160,34 @@ function basicDrinks (action) {
 }
 
 function giveMilk () {
-        if ((choice.drinkName === "") && (choice.drinkType !== 'author') && (choice.drinkType !== 'basic')) {
-            choice.drinkName = 'milk';
-            choice.milk = 1;
-            choice.price = coffeeCups.milk[3];
-            $('.drink').text("Напиток: " + coffeeCups[choice.drinkName][1]);
-        } else if (choice.drinkType !== "author") {
-            choice.milk += 1;
-            choice.price += coffeeCups.milk[3];
-            if (choice.drinkName === 'milk') {
-                $('.drink').text("Напиток: " + coffeeCups[choice.drinkName][1] + ", " + choice.milk + ' порция(и)');
-            } else {
-                $('.drink').text("Напиток: " + coffeeCups[choice.drinkName][1] + " c " + choice.milk + ' порцией(ми) молока и ' + choice.cherrySyrup + ' сиропа');
-            }
-        }
+    if ((choice.drinkName === "") && (choice.drinkType !== 'author') && (choice.drinkType !== 'basic')) {
+        choice.drinkName = 'milk';
+        choice.milk = 1;
+        choice.price = coffeeCups.milk[3];
+    } else if (choice.drinkType !== "author") {
+        choice.milk += 1;
+        choice.price += coffeeCups.milk[3];
+    }
 }
 
+function updateDrinkName() {
+    let name = "Напиток: " + coffeeCups[choice.drinkName][1];
 
-$(document).ready(function(){
-    $(".payment").on("click",function(){
-       makingCoffee();
-    });
-});
+    if (choice.drinkName === 'milk') {
+        if (choice.milk > 1 && !choice.cherrySyrup)
+            name += ", " + choice.milk + ' порция(и)';
+    } else if (choice.cherrySyrup > 0 || choice.milk > 0) {
+        name += " c " + choice.milk + ' порцией(ми) молока и ' + choice.cherrySyrup + ' сиропа';
+    }
 
-$(document).ready(function (){
-        $('.reject').append('<button>Отмена заказа</button>');
-        $('.reject').on('click', function () {
-            $('.drink').text("Напиток:");
-            $('.price').text("Цена:");
-            choice = {
-                drinkName: '',
-                drinkType: '',
-                howMany: 0,
-                milk: 0,
-                cherrySyrup: 0
-            };
-            $('.extra-status').empty();
-            console.log(choice)
-    })
-    });
+    $('.drink').text(name);
+}
 
 /*
 ProgressBar activation
 */
 
-const makingTime = {
-    basic: 3000,
-    author: 5000,
-    custom: 8000,
-};
-
-function setDrinkType () {
+function getDrinkTime () {
 
     // IMHO, double or triple basic drinks are also custom type. Then (choice.howMany > 1)
 
@@ -219,13 +205,11 @@ function makingCoffee() {
     progressBar.empty();
     progressBar.addClass("progress");
     progressBar.removeClass('reject');
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.progress').append('<div id="myBar"></div>');
-
         move();
-        // $('.progress').append('<img src="https://clck.ru/JVMkw" alt="Coffee progress" style="width: 40%; ">');
+        setTimeout(coffeeIsReady, getDrinkTime())
     });
-    setTimeout(coffeeIsReady, setDrinkType())
 }
 
 function coffeeIsReady() {
@@ -234,7 +218,7 @@ function coffeeIsReady() {
     coffeeResult.addClass("result");
     coffeeResult.removeClass('progress');
     $(document).ready(function(){
-        $('.result').append('<img src=' + coffeeCups[choice.drinkName][2] + ' alt="Coffee is ready">');
+        $('.result').append('<img src=' + coffeeCups[choice.drinkName][2] + ' style="width:200px" alt="Coffee is ready">');
 
         // delivery image appears
 
@@ -243,16 +227,20 @@ function coffeeIsReady() {
     pourDrink();
     console.log("Больших стаканов: " + bigCup.quantity + '; маленьких: ' + smallCup.quantity);
     blink();
-    //Почему не срабатывает ожидание?
     setTimeout( function () {
         music.play()
     }, 5000);
 
     setTimeout(function () {
-
-        // Музыка прекрщается, а мигание нет (((
         music.pause();
         $('.status-order').append('<p class="extra-status" >НАПИТОК В ЗОНЕ ВЫДАЧИ</p>')
-    }, 25000)
+    }, 25000)}
 
-}
+
+    function updateMilkButton() {
+        if (choice.drinkType === "author") {
+            $(".milk").attr("disabled", "disabled");
+        } else {
+            $(".milk").removeAttr("disabled");
+        }
+    }

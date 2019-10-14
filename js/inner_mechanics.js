@@ -3,7 +3,7 @@
 function move() {
     let elem = document.getElementById("myBar");
     let width = 1;
-    let id = setInterval(frame, (setDrinkType() / 100));
+    let id = setInterval(frame, (getDrinkTime() / 100));
     function frame() {
         if (width >= 100) {
             clearInterval(id);
@@ -17,16 +17,6 @@ function move() {
 /*
 Coffee Cups
 */
-
-let bigCup = {
-    volume: 380,
-    quantity: 6,
-};
-
-let smallCup = {
-    volume: 250,
-    quantity: 5,
-};
 
 // drinkName должен равняться объёму кофе + наполнитель; ещё одна функция
 
@@ -61,11 +51,8 @@ $(document).ready(function (){
         coffeeResult.addClass("reject");
         coffeeResult.removeClass('result');
         $('#delivery').empty();
-        //правильно ли вставил кнопку?
         $('.reject').append('<button>Отмена заказа</button>');
-        clearInterval(blink);
-        music.pause()
-
+        music.pause();
     })
 });
 
@@ -87,8 +74,4 @@ let blink = function blinkingBorder () {
     setTimeout(function () {
         clearInterval(interval);
     }, 25000)
-}
-
-function playMelody() {
-
-}
+};

@@ -1,0 +1,17 @@
+@media (min-width: 300px) and (max-width: 849px) {
+    .screen {height: 15vw}
+    body {font-size: 0.9em}
+    .buttons {height: 21vw;}
+    button {
+        font-size: 0.8rem;
+        padding: 0;
+    }
+}
+
+@media (min-width: 850px) and (max-width: 1200px) {
+    .screen {height: 15vw}
+    .result {
+        position: absolute;
+        bottom: 25%;
+    }
+}
